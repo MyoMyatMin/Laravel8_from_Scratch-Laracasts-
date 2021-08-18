@@ -5,7 +5,7 @@ use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 use App\Models\Post;
 use App\Models\User;
-
+use App\Http\Controllers\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,18 +21,5 @@ use App\Models\User;
 Route::get('/',[PostController::class, 'index'])->name('home');
 
 Route::get('posts/{post:slug}',[PostController::class,'show']);
-/*Route::get('categories/{category:slug}', function (Category $category) {
-   // dd($category->posts);
-    return view('posts',[
-        'posts' => $category->posts,
-        'currentCategory' => $category,
-        'categories' => Category::all()
-    ]);
-})->name('category'); */
-Route::get('authors/{author:username}', function (User $author) {
-   // dd($author->posts);
-    return view('posts.index',[
-        'posts' => $author->posts,
-
-    ]);
-});
+Route::get('register',[RegisterController::class,'create']);
+Route::post('register',[RegisterController::class,'store']);
